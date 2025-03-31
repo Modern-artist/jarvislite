@@ -163,15 +163,12 @@ const StatusColumn = ({ status, tasks, handleEdit, removeTask }) => {
         console.log(taskId, newStatus)
         // Find the task in the Redux store
         const taskToUpdate = tasks.find(t => t.id === taskId);
-        console.log('drop called', taskToUpdate.status, newStatus)
-        // console.log("taskToUpdate", taskToUpdate, "taskToUpdate.status !== newStatus", taskToUpdate.status !== newStatus)
-        if (taskToUpdate && taskToUpdate.status !== newStatus) {
+        if (taskToUpdate) {
             dispatch(updateStatus({
                 id: taskId,
                 status: newStatus
             }));
         }
-        console.log(tasks)
     }
 
     // Filter tasks for this status column
@@ -274,9 +271,6 @@ export default function Todo() {
     });
 
     const statuses = ["Pending", "InProgress", "Completed"];
-    useEffect(() => {
-
-    }, [third])
 
     const tasks = useSelector((state) => state.tasks.tasks);
     const dispatch = useDispatch();
@@ -314,7 +308,7 @@ export default function Todo() {
                     Add Task
                 </Button>
 
-                {tasks.length > 0 ? (
+                {tasks && tasks.length > 0 ? (
                     <Box className="p-10">
                         <Typography onClick={() => console.log(tasks)} variant="h5" fontWeight="600" className=' text-slate-200' sx={{ mb: 3 }}>
                             Task Management Board

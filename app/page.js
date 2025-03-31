@@ -1,5 +1,12 @@
+'use client'
+
 import React from 'react'
-import Hero from '@/components/Hero'
+import dynamic from 'next/dynamic';
+
+// import Hero from '@/components/Hero'
+const Hero = dynamic(() => import('@/components/Hero'), {
+  ssr: false,
+});
 
 const page = () => {
   return (
